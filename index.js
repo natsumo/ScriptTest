@@ -1,20 +1,21 @@
-module.exports = function(req, res) {
-  require('dotenc').config();
-  const APPLICATION_KEY = process.env.APPLICATION_KEY;
-  const CLIENT_KEY = process.env.CLIENT_KEY;
+'use strict';
 
-  var NCMB = require('ncmb');
-  var ncmb = new NCMB(APPLICATION_KEY, CLIENT_KEY);
+require('dotenv').config();
 
-  var TestClass = ncmb.DataStore('TestClass');
-  var testClass = new TestClass();
+const APPLICATION_KEY = process.env.APPLICATION_KEY;
+const CLIENT_KEY = process.env.CLIENT_KEY;
 
-  testClass.set("message", "Hello, NCMB!")
-            .save()
-            .then(function(){
-              res.status(200).send("OK");
-            })
-            .catch(function(error){
-              res.status(500).send("NG:" + error);
-            });
-}
+var NCMB = require('ncmb');
+var ncmb = new NCMB(APPLICATION_KEY, CLIENT_KEY);
+
+var TestClass = ncmb.DataStore('TestClass');
+var testClass = new TestClass();
+
+testClass.set("message", "Hello, NCMB!")
+          .save()
+          .then(function(){
+            console.log("OK");
+          })
+          .catch(function(error){
+            console.log("NG:" + error);
+          });
